@@ -227,6 +227,7 @@ static void updatestatus(void);
 static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
+static void viewlr(const Arg *arg);
 static void view(const Arg *arg);
 static Client *wintoclient(Window w);
 static Monitor *wintomon(Window w);
@@ -381,6 +382,7 @@ applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact)
 void
 arrange(Monitor *m)
 {
+
 	if (m)
 		showhide(m->stack);
 	else for (m = mons; m; m = m->next)
@@ -703,7 +705,7 @@ drawbar(Monitor *m)
 	Client *c;
 
 	/* draw status first so it can be overdrawn by tags later */
-	if (m == selmon) { /* status is only drawn on selected monitor */
+	if (m == selmon || 1) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
 		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
 		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
@@ -1740,12 +1742,24 @@ toggletag(const Arg *arg)
 void
 toggleview(const Arg *arg)
 {
+	/*
 	unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);
 
 	if (newtagset) {
 		selmon->tagset[selmon->seltags] = newtagset;
 		focus(NULL);
 		arrange(selmon);
+	}
+	*/
+	Monitor *m;
+	for (m = mons; m; m = m->next) {
+		unsigned int newtagset = m->tagset[m->seltags] ^ (arg->ui & TAGMASK);
+
+		if (newtagset) {
+			m->tagset[m->seltags] = newtagset;
+			focus(NULL);
+			arrange(m);
+		}
 	}
 }
 
@@ -1990,9 +2004,11 @@ updatesizehints(Client *c)
 void
 updatestatus(void)
 {
+	Monitor *m;
 	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
 		strcpy(stext, "dwm-"VERSION);
-	drawbar(selmon);
+	for(m = mons; m; m = m->next)
+		drawbar(m);
 }
 
 void
@@ -2036,15 +2052,43 @@ updatewmhints(Client *c)
 }
 
 void
+viewlr(const Arg *arg)
+{
+	Monitor *m;
+	for (m = mons; m; m = m->next) {
+		if (arg->ui)
+			m->tagset[m->seltags] = (m->tagset[m->seltags] << 1) & TAGMASK;
+		else
+			m->tagset[m->seltags] = (m->tagset[m->seltags] >> 1) & TAGMASK;
+		if (!m->tagset[m->seltags])
+			m->tagset[m->seltags] = 1 << ((1 - arg->ui) * (LENGTH(tags) - 1));
+		focus(NULL);
+		arrange(m);
+	}
+}
+
+void
 view(const Arg *arg)
 {
+	/*
 	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;
-	selmon->seltags ^= 1; /* toggle sel tagset */
+	selmon->seltags ^= 1;
 	if (arg->ui & TAGMASK)
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
 	focus(NULL);
 	arrange(selmon);
+	*/
+	Monitor *m;
+	for (m = mons; m; m = m->next) {
+		if ((arg->ui & TAGMASK) == m->tagset[m->seltags])
+			return;
+		m->seltags ^= 1;
+		if (arg->ui & TAGMASK)
+			m->tagset[m->seltags] = arg->ui & TAGMASK;
+		focus(NULL);
+		arrange(m);
+	}
 }
 
 Client *
