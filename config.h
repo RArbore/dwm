@@ -10,15 +10,13 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fira Mono:size=10" };
 static const char dmenufont[]       = "Fira Mono:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_blue[]        = "#2c97f4";
+static const char col_gray[]        = "#21242b";
+static const char col_white[]       = "#bbc2cf";
+static const char col_highlight[]        = "#c678dd";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_blue,  col_blue  },
+	[SchemeNorm] = { col_white, col_gray, col_gray },
+	[SchemeSel]  = { col_white, col_highlight,  col_highlight  },
 };
 
 /* tagging */
@@ -37,7 +35,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -59,16 +57,18 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_blue, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL }; //{ "emacs", "-f", "vterm", "-f", "evil-emacs-state", NULL };
-static const char *browsercmd[]  = { "librewolf", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray, "-nf", col_white, "-sb", col_highlight, "-sf", col_white, NULL };
+static const char *termcmd[]  = { "st", NULL }; //{ "emacs", "-f", "vterm", "-f", "evil-emacs-state", NULL };
+static const char *browsercmd[]  = { "icecat", NULL };
 static const char *emacscmd[]  = { "emacs", NULL };
-static const char *bluetoothcmd[]  = { "blueman-manager", NULL };
 static const char *filescmd[]  = { "thunar", NULL };
+static const char *rsscmd[]  = { "st", "newsboat", NULL };
+static const char *mailcmd[]  = { "st", "neomutt", NULL };
+static const char *keepassxccmd[]  = { "keepassxc", NULL };
 
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "bluez_sink.30_50_75_08_E5_0E.a2dp_sink", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "bluez_sink.30_50_75_08_E5_0E.a2dp_sink", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "bluez_sink.30_50_75_08_E5_0E.a2dp_sink", "toggle",  NULL };
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
 
 static const char *wallpapercmd[]  = { "/home/russel/.startup/wallpaper.sh", NULL };
 
@@ -76,9 +76,11 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = wallpapercmd } },
-	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = bluetoothcmd } },
+	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = keepassxccmd } },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = filescmd } },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mailcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_n,      spawn,          {.v = rsscmd} },
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd} },
 	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
@@ -113,9 +115,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Left,   viewlr,         {.ui = 0} }, \
 	{ MODKEY,                       XK_Right,  viewlr,         {.ui = 1} }, \
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-	{ 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
-	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+	{ MODKEY,                       XK_Down, spawn, {.v = downvol } },
+	{ MODKEY,                       XK_Up, spawn, {.v = upvol   } },
 };
 
 /* button definitions */
