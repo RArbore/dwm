@@ -62,6 +62,7 @@ static const char *termcmd[]  = { "st", NULL }; //{ "emacs", "-f", "vterm", "-f"
 static const char *browsercmd[]  = { "icecat", NULL };
 static const char *emacscmd[]  = { "emacs", NULL };
 static const char *filescmd[]  = { "thunar", NULL };
+static const char *logoutcmd[]  = { "slock", NULL };
 static const char *rsscmd[]  = { "st", "newsboat", NULL };
 static const char *mailcmd[]  = { "st", "neomutt", NULL };
 static const char *keepassxccmd[]  = { "keepassxc", NULL };
@@ -69,6 +70,9 @@ static const char *keepassxccmd[]  = { "keepassxc", NULL };
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+
+static const char *lcdbrightencmd[]  = { "xbacklight", "-inc", "10", NULL };
+static const char *lcddimcmd[]  = { "xbacklight", "-dec", "10", NULL };
 
 static const char *wallpapercmd[]  = { "/home/russel/.startup/wallpaper.sh", NULL };
 
@@ -81,6 +85,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mailcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_n,      spawn,          {.v = rsscmd} },
+	{ MODKEY,                       XK_s,      spawn,          {.v = logoutcmd} },
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd} },
 	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
@@ -114,6 +119,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY,                       XK_Left,   viewlr,         {.ui = 0} }, \
 	{ MODKEY,                       XK_Right,  viewlr,         {.ui = 1} }, \
+	{ MODKEY|ShiftMask,             XK_Up,   spawn,          {.v = lcdbrightencmd} }, \
+	{ MODKEY|ShiftMask,             XK_Down,  spawn,          {.v = lcddimcmd} }, \
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY,                       XK_Down, spawn, {.v = downvol } },
 	{ MODKEY,                       XK_Up, spawn, {.v = upvol   } },
