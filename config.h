@@ -58,21 +58,21 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray, "-nf", col_white, "-sb", col_highlight, "-sf", col_white, NULL };
-static const char *termcmd[]  = { "st", NULL }; //{ "emacs", "-f", "vterm", "-f", "evil-emacs-state", NULL };
+static const char *termcmd[]  = { "alacritty", NULL }; //{ "emacs", "-f", "vterm", "-f", "evil-emacs-state", NULL };
 static const char *browsercmd[]  = { "icecat", NULL };
 static const char *emacscmd[]  = { "emacs", NULL };
 static const char *filescmd[]  = { "thunar", NULL };
 static const char *logoutcmd[]  = { "slock", NULL };
-static const char *rsscmd[]  = { "st", "newsboat", NULL };
-static const char *mailcmd[]  = { "st", "neomutt", NULL };
+static const char *rsscmd[]  = { "alacritty", "-e", "newsboat", NULL };
+static const char *mailcmd[]  = { "alacritty", "-e", "claws-mail", "--alternate-config-dir", "\"$XDG_DATA_HOME\"/claws-mail", NULL };
 static const char *keepassxccmd[]  = { "keepassxc", NULL };
 
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
 
-static const char *lcdbrightencmd[]  = { "xbacklight", "-inc", "10", NULL };
-static const char *lcddimcmd[]  = { "xbacklight", "-dec", "10", NULL };
+static const char *lcdbrightencmd[]  = { "xbacklight", "-inc", "2", NULL };
+static const char *lcddimcmd[]  = { "xbacklight", "-dec", "2", NULL };
 
 static const char *wallpapercmd[]  = { "/home/russel/.startup/wallpaper.sh", NULL };
 
@@ -122,8 +122,11 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Up,   spawn,          {.v = lcdbrightencmd} }, \
 	{ MODKEY|ShiftMask,             XK_Down,  spawn,          {.v = lcddimcmd} }, \
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY,                       XK_Down, spawn, {.v = downvol } },
-	{ MODKEY,                       XK_Up, spawn, {.v = upvol   } },
+	{ 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+	{ 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+	{ 0,                       XF86XK_MonBrightnessUp, spawn, {.v = lcdbrightencmd   } },
+	{ 0,                       XF86XK_MonBrightnessDown, spawn, {.v = lcddimcmd   } },
 };
 
 /* button definitions */
