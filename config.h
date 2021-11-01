@@ -64,7 +64,7 @@ static const char *emacscmd[]  = { "emacs", NULL };
 static const char *filescmd[]  = { "thunar", NULL };
 static const char *logoutcmd[]  = { "slock", NULL };
 static const char *rsscmd[]  = { "alacritty", "-e", "newsboat", NULL };
-static const char *mailcmd[]  = { "claws-mail", "--alternate-config-dir", "\"$XDG_DATA_HOME\"/claws-mail", NULL };
+static const char *mailcmd[]  = { "claws-mail", "--alternate-config-dir", "$XDG_DATA_HOME/claws-mail", NULL };
 static const char *keepassxccmd[]  = { "keepassxc", NULL };
 
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
