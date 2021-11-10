@@ -3,8 +3,8 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 4;        /* border pixel of windows */
-static const unsigned int gappx     = 8;        /* gaps between windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int gappx     = 15;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -59,8 +59,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray, "-nf", col_white, "-sb", col_highlight, "-sf", col_white, NULL };
 static const char *termcmd[]  = { "alacritty", NULL }; //{ "emacs", "-f", "vterm", "-f", "evil-emacs-state", NULL };
-static const char *browsercmd[]  = { "icecat", NULL };
-static const char *emacscmd[]  = { "emacs", NULL };
+static const char *browsercmd[]  = { "librewolf", NULL };
+static const char *emacscmd[]  = { "emacsclient", "-c", "-a", "emacs", NULL };
 static const char *filescmd[]  = { "thunar", NULL };
 static const char *logoutcmd[]  = { "slock", NULL };
 static const char *rsscmd[]  = { "alacritty", "-e", "newsboat", NULL };
