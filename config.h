@@ -67,9 +67,9 @@ static const char *rsscmd[]  = { "alacritty", "-e", "newsboat", NULL };
 static const char *mailcmd[]  = { "alacritty", "-e", "neomutt", NULL };
 static const char *keepassxccmd[]  = { "keepassxc", NULL };
 
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
 
 static const char *lcdbrightencmd[]  = { "xbacklight", "-inc", "2", NULL };
 static const char *lcddimcmd[]  = { "xbacklight", "-dec", "2", NULL };
