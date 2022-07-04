@@ -71,8 +71,8 @@ static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle",  NULL };
 
-static const char *lcdbrightencmd[]  = { "xbacklight", "-inc", "2", NULL };
-static const char *lcddimcmd[]  = { "xbacklight", "-dec", "2", NULL };
+static const char *lcdbrightencmd[]  = { "doas", "/home/russel/.local/bin/brightness", "1000", NULL };
+static const char *lcddimcmd[]  = { "doas", "/home/russel/.local/bin/brightness", "-1000", NULL };
 
 static const char *wallpapercmd[]  = { "/home/russel/.startup/wallpaper.sh", NULL };
 
