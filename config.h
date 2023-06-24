@@ -33,7 +33,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
@@ -76,6 +76,8 @@ static const char *lcddimcmd[]  = { "doas", "/home/russel/.local/bin/brightness"
 
 static const char *wallpapercmd[]  = { "/home/russel/.startup/wallpaper.sh", NULL };
 
+static const char *reconnectcmd[] = { "/bin/sh", "-c", "\"bluetoothctl connect 95:05:BB:25:30:39; bluetoothctl disconnect 95:05:BB:25:30:39\"", NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
@@ -88,6 +90,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_s,      spawn,          {.v = logoutcmd} },
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd} },
 	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd} },
+	{ MODKEY,                       XK_a,      spawn,          {.v = reconnectcmd} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
