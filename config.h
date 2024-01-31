@@ -64,7 +64,7 @@ static const char *emacscmd[]  = { "emacsclient", "-c", "-a", "emacs", NULL };
 static const char *filescmd[]  = { "thunar", NULL };
 static const char *logoutcmd[]  = { "slock", NULL };
 static const char *rsscmd[]  = { "alacritty", "-e", "newsboat", NULL };
-static const char *mailcmd[]  = { "alacritty", "-e", "neomutt", NULL };
+static const char *mailcmd[]  = { "/home/russel/.local/bin/mailspring", NULL };
 static const char *keepassxccmd[]  = { "keepassxc", NULL };
 
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",     NULL };
@@ -76,7 +76,7 @@ static const char *lcddimcmd[]  = { "doas", "/home/russel/.local/bin/brightness"
 
 static const char *wallpapercmd[]  = { "/home/russel/.startup/wallpaper.sh", NULL };
 
-static const char *reconnectcmd[] = { "/bin/sh", "-c", "\"bluetoothctl connect 95:05:BB:25:30:39; bluetoothctl disconnect 95:05:BB:25:30:39\"", NULL };
+static const char *reconnectcmd[] = { "/home/russel/.local/bin/reconnect.sh", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
