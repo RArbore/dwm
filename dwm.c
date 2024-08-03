@@ -1282,7 +1282,7 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	unsigned int n;
 	unsigned int gapoffset;
 	unsigned int gapincr;
-	Client *nbc;
+	Client *nbc, *first_same_tag;
 
 	wc.border_width = c->bw;
 
@@ -1309,7 +1309,11 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	c->oldw = c->w; c->w = wc.width = w - gapincr;
 	c->oldh = c->h; c->h = wc.height = h - gapincr;
 	if (n > 1 && gapoffset != 0) {
-		if (c == c->mon->clients)
+		first_same_tag = c->mon->clients;
+		while (first_same_tag != NULL && first_same_tag->tags != c->tags) {
+			first_same_tag = first_same_tag->next;
+		}
+		if (c == first_same_tag)
 			c->w = wc.width = c->w + gapoffset / 2;
 		else {
 			c->x = wc.x = c->x - gapoffset / 2;
