@@ -91,8 +91,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd} },
 	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd} },
 	{ MODKEY,                       XK_a,      spawn,          {.v = reconnectcmd} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -108,10 +108,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY|ControlMask,           XK_k,      focusmon,       {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_j,      focusmon,       {.i = -1 } },
-	{ MODKEY|ShiftMask|ControlMask, XK_k,      tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask|ControlMask, XK_j,      tagmon,         {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_k,      focusmon,       {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_j,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask|ControlMask, XK_k,      tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask|ControlMask, XK_j,      tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
