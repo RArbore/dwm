@@ -10,9 +10,9 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fira Mono:size=10" };
 static const char dmenufont[]       = "Fira Mono:size=10";
-static const char col_gray[]        = "#282828";
-static const char col_white[]       = "#ebdbb2";
-static const char col_highlight[]   = "#b8bb26";
+static const char col_gray[]        = "#4c4f69";
+static const char col_white[]       = "#eff1f5";
+static const char col_highlight[]   = "#ca9ee6";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_white, col_gray, col_gray },
@@ -91,8 +91,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      spawn,          {.v = browsercmd} },
 	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd} },
 	{ MODKEY,                       XK_a,      spawn,          {.v = reconnectcmd} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
